@@ -14,30 +14,46 @@ var TodoApp = React.createClass({
             todos: [
                 {
                     id: uuid(),
-                    text: 'walk the dog'
+                    text: 'walk the dog',
+                    completed: false
                 },  {
                     id: uuid(),
-                    text: 'clean the yard'
+                    text: 'clean the yard',
+                    completed: true
                 }, {
                     id: uuid(),
-                    text: 'play guitar'
+                    text: 'play guitar',
+                    completed: true
                 }, {
                     id: uuid(),
-                    text: 'practice vocal warmups'
+                    text: 'practice vocal warmups',
+                    completed: false
                 }
             ]
         }
     },
     handleAddTodo: function (text) {
+        //using spread we set new todos array equal to old one with new object attached to the end, using uuid node package for radom id's
         this.setState({
             todos: [
                 ...this.state.todos,
                 {
                     id: uuid(),
                     text: text,
+                    completed: false
                 }
             ]
         });
+    },
+    handleToggle: function(id) {
+        // map over todos and toggle check status then update state of todos
+        var updatedTodos = this.state.todos.map((todo) => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+        this.setState({todos: updatedTodos});
     },
     handleSearch: function (showCompleted, searchText) {
         this.setState({
@@ -50,7 +66,7 @@ var TodoApp = React.createClass({
         return (
             <div>
                 <TodoSearch onSearch={this.handleSearch}/>
-                <TodoList todos={todos} />
+                <TodoList todos={todos} onToggle={this.handleToggle} />
                 <AddTodo onAddTodo={this.handleAddTodo}/>
             </div>
         )
