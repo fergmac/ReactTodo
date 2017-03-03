@@ -1,9 +1,10 @@
 var React = require('react');
+var uuid = require('node-uuid');
 
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
-var TodoSearch =  require('TodoSearch');
-var uuid = require('node-uuid');
+var TodoSearch = require('TodoSearch');
+var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
     getInitialState: function () {
@@ -11,26 +12,13 @@ var TodoApp = React.createClass({
             showCompleted: false,
             //return all todos no mater what the text is
             searchText: '',
-            todos: [
-                {
-                    id: uuid(),
-                    text: 'walk the dog',
-                    completed: false
-                },  {
-                    id: uuid(),
-                    text: 'clean the yard',
-                    completed: true
-                }, {
-                    id: uuid(),
-                    text: 'play guitar',
-                    completed: true
-                }, {
-                    id: uuid(),
-                    text: 'practice vocal warmups',
-                    completed: false
-                }
-            ]
+            //when app starts we get todos
+            todos: TodoAPI.getTodos()
         }
+    },
+    componentDidUpdate: function () {
+        //when app updates we set the todos
+        TodoAPI.setTodos(this.state.todos);
     },
     handleAddTodo: function (text) {
         //using spread we set new todos array equal to old one with new object attached to the end, using uuid node package for radom id's
