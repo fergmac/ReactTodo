@@ -19,7 +19,7 @@ export var showCompletedReducer = (state = false, action) => {
     }
 };
 
-export var todosReducer = (state = [], action ) => {
+export var todosReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
@@ -42,6 +42,8 @@ export var todosReducer = (state = [], action ) => {
                         completed: nextCompleted,
                         completedAt: nextCompleted ? moment().unix() : undefined 
                     };
+                } else {
+                    return todo;
                 }
             })
         default:
