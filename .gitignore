@@ -1,7 +1,7 @@
-node_modules
+node_modules/
 .build
 .vscode
-bundle.js
+public/bundle.js
 
 .DS_Store
 npm-debug.log
