@@ -10,7 +10,7 @@ export var AddTodo = React.createClass({
         
         if (todoText.length > 0) {
             this.refs.todoText.value = '';
-            dispatch(actions.addTodo(todoText));
+            dispatch(actions.startAddTodo(todoText));
         } else {
             //puts cursor back in input field automatically so the user can try again
             this.refs.todoText.focus();
