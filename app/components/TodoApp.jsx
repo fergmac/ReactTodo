@@ -13,7 +13,7 @@ export var TodoApp = React.createClass({
 
         dispatch(actions.startLogout());
     },
-    render()  {
+    render() {
         return (
             <div>
                 <div className="page-actions">

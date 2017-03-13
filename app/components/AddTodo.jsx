@@ -3,7 +3,7 @@ var {connect} = require('react-redux');
 var actions = require('actions');
 
 export var AddTodo = React.createClass({
-     handleSubmit: function (e) {
+     handleSubmit(e) {
         e.preventDefault();
         var {dispatch} = this.props;
         var todoText = this.refs.todoText.value;
@@ -16,7 +16,7 @@ export var AddTodo = React.createClass({
             this.refs.todoText.focus();
         }
     },
-    render: function () {
+    render() {
         return (
             <div className="container__footer">
                 <form onSubmit={this.handleSubmit}>
